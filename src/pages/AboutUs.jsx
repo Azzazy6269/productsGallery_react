@@ -1,5 +1,11 @@
 import React from 'react';
 
+export const ErrorBoundary = ()=>{
+  return (
+    <Error/>
+  )
+}
+
 const AboutUs = () => {
   return (
     <div className="bg-white text-gray-800 min-h-screen">

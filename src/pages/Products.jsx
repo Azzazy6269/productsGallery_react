@@ -1,5 +1,10 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router';
+import ProductDetails from './ProductDetails'
+import Error from '../components/Error';
+import Loading from '../components/Loading';
+import { instance } from '../AxiosInstance';
 const Products = () => {
   const [searchKeyWord, setSearchKeyWord] = useState("");
   const [products, setProducts] = useState(null);
@@ -11,8 +16,9 @@ const Products = () => {
       setIsLoading(true);
       setError(null);
       try{
-        const response = await fetch("https://fakestoreapi.com/products");
-        const data = await response.json();
+        //const response = await fetch("https://fakestoreapi.com/products");
+        const response = await instance.get();
+        const data = await response.data;
         if(searchKeyWord !==""){setProducts(data.filter(p=>p.title.startsWith(searchKeyWord)));}
         else{setProducts(data);}
         console.log(products);
@@ -44,25 +50,26 @@ const Products = () => {
         />
         </label>
       </div>
-      {isLoading && <h1>loading.......</h1>}
-      {error && <h1>{error}</h1>}
+      {isLoading &&<Loading/>}
+      {error && (<div><Error/></div>)}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products && products.map(p=>(
           <li key={p.id}>
-            <div className="card bg-base-100 w-96 shadow-sm">
-              <figure>
-                <img
+            <div className="card bg-base-100 w-96 mb-4 shadow-sm">
+              <figure >
+                <img className=' w-auto h-96'
                   src={p.image}
                   alt={p.title} />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{p.title}</h2>
-                <p>{p.description}</p>
+                <h2 className="card-title min-h-24">{p.title}</h2>
+                <p>{p.description.substring(0,75)}....</p>
                 <p>{p.category}</p>
                 <p>{p.price}</p>
-                {p.price>100 ? <p>premium</p>:<p>best-seller</p>}
+                {p.price>100 ? <p className='badge badge-primary max-h-10'>premium</p>:<p className='badge badge-secondary max-h-10'>best-seller</p>}
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
+                  <button className="btn btn-primary">
+                  <NavLink to={`/ProductDetails/${p.id}`}>Details</NavLink></button>
                 </div>
               </div>
             </div>
@@ -76,3 +83,6 @@ const Products = () => {
 }
 
 export default Products
+
+
+
