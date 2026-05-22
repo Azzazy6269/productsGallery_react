@@ -1,14 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router'
 import { useTheme } from '../store/Zustand/useThemeStore'
 import { useSelector } from 'react-redux';
+import { LanguageContext } from '../context/LanguageContext';
 
 const NavBar = () => {
 
     const theme = useTheme((state)=>state.theme);
     const toggleTheme = useTheme((state)=>state.toggleTheme);
     const cartItems = useSelector((state) => state.cart.items);
-
+    const {language,toggleLanguage}=useContext(LanguageContext);
   return (
     <>
         <div className={`navbar ${theme==='light'? 'bg-base-100':'bg-black'} shadow-sm`}>
@@ -49,7 +51,7 @@ const NavBar = () => {
                             ${theme==='light'? 'text-black':'text-white'}
                             ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
                             `
-                        }>Products</NavLink></li>
+                        }>{language==='en'?'Products':'المنتجات'}</NavLink></li>
                 <li><NavLink
                         to='/cart'
                         className={({ isActive }) =>
@@ -57,7 +59,7 @@ const NavBar = () => {
                             ${theme==='light'? 'text-black':'text-white'}
                             ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
                             `
-                        }>Cart({cartItems.length})</NavLink></li>
+                        }>{language==='en'?'Cart':'السلة'} - {cartItems.length}</NavLink></li>
                 <li><NavLink
                         to='/aboutUs'
                         className={({ isActive }) =>
@@ -65,12 +67,13 @@ const NavBar = () => {
                             ${theme==='light'? 'text-black':'text-white'}
                             ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
                             `
-                        }>About us</NavLink></li>
+                        }>{language==='en'?'About Us':'عنا'}</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="rounded-2xl btn btn-soft btn-primary m-1.5">Login</a>
-                <button className="rounded-2xl btn btn-soft btn-secondary" onClick={toggleTheme}>{theme}</button>
+                <a className="rounded-2xl btn btn-soft btn-primary m-1.5">{language==='en'?'Login':'تسجيل الدخول'}</a>
+                <button className="rounded-2xl btn btn-soft btn-secondary" onClick={toggleTheme}>{theme==='light'?'☀️':'🌙'}</button>
+                <button className={`mx-1 btn btn-xs btn-outline ${theme==='light'?'text-black':'text-white'}`} onClick={()=>{toggleLanguage()}}>{language}</button>
             </div>
         </div>
     </>

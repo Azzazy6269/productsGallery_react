@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext} from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Error from './../components/Error'
 import { instance } from '../AxiosInstance';
 import { useTheme } from '../store/Zustand/useThemeStore'
 import { useDispatch,useSelector } from 'react-redux';
 import { addToCart } from '../store/Redux/cartSlice';
-
+import {LanguageContext} from '../context/LanguageContext'
 //loader and errorBoundary is a replcement of useState,useEffect,isLoading,error
 export const ErrorBoundary = ()=>{
   return (
@@ -25,9 +25,9 @@ const ProductDetails = () => {
   const theme = useTheme((state)=>state.theme);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const {language}=useContext(LanguageContext);
   const addToCartHandler = () => {
   const isExists = cartItems.some(p => p.id === product.id);
-
   if (isExists) {
     //alert("already exists");
     return;
@@ -83,7 +83,7 @@ const ProductDetails = () => {
         <p>${product.price.toFixed(2)}</p>
         {product.price > 100 ? <p className='badge badge-primary max-h-10'>premium</p> : <p className='badge badge-secondary max-h-10'>best-seller</p>}
         <div className="card-actions justify-end">
-          <button className="btn btn-primary" onClick={addToCartHandler}>Add to Cart</button>
+          <button className="btn btn-primary" onClick={addToCartHandler}>{language==='en'?'Add to cart':'اضف للسلة'}</button>
         </div>
       </div>
     </div>

@@ -1,11 +1,12 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState , useContext } from 'react'
 import { NavLink } from 'react-router';
 import ProductDetails from './ProductDetails'
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import { instance } from '../AxiosInstance';
 import { useTheme } from '../store/Zustand/useThemeStore'
+import {LanguageContext} from '../context/LanguageContext'
 
 
 const Products = () => {
@@ -14,6 +15,7 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError ] = useState(null);
   const theme = useTheme((state)=>state.theme);
+  const {language}=useContext(LanguageContext);
 
   useEffect(()=>{
     (async()=>{
@@ -73,7 +75,7 @@ const Products = () => {
                 {p.price>100 ? <p className='badge badge-primary max-h-10'>premium</p>:<p className='badge badge-secondary max-h-10'>best-seller</p>}
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">
-                  <NavLink to={`/ProductDetails/${p.id}`}>Details</NavLink></button>
+                  <NavLink to={`/ProductDetails/${p.id}`}>{language==='en'?'Details':'تفاصيل'}</NavLink></button>
                 </div>
               </div>
             </div>

@@ -1,14 +1,17 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import store from './../store/Redux/store.js'
 import { useTheme } from '../store/Zustand/useThemeStore'
 import { removeFromCart } from '../store/Redux/cartSlice.js';
 import { Link } from 'react-router';
+import {LanguageContext} from '../context/LanguageContext'
+
 const Cart = () => {
   const products = useSelector((state) => state.cart.items);
   const Plength = products.length
   const theme = useTheme((state)=>state.theme);
   const dispatch = useDispatch();
+  const {language}=useContext(LanguageContext);
   const removeFromCartHandler = (id)=>{
     dispatch(removeFromCart(id));
   }
@@ -53,7 +56,7 @@ const Cart = () => {
                 <p>{p.price}</p>
                 {p.price>100 ? <p className='badge badge-primary max-h-10'>premium</p>:<p className='badge badge-secondary max-h-10'>best-seller</p>}
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary" onClick={()=>removeFromCartHandler(p.id)}>remove from Cart</button>
+                  <button className="btn btn-primary" onClick={()=>removeFromCartHandler(p.id)}>{language==='en'?'Remove from cart':'حذف من السلة'}</button>
                 </div>
               </div>
             </div>

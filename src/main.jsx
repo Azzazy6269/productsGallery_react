@@ -14,6 +14,7 @@ import Cart from './pages/Cart.jsx'
 import ProductDetails , {ErrorBoundary as ProductDetailsError , loader as ProductDetailsLoader} from './pages/ProductDetails.jsx'
 import { addToCart, removeFromCart } from './store/Redux/cartSlice.js'
 import store from './store/Redux/store.js' 
+import { LanguageContext } from './context/LanguageContext.jsx'
 //const cart = useSelector();
 const router = createBrowserRouter([
   {
@@ -54,8 +55,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router = {router} />
-    </Provider>
+    <LanguageContext>
+      <Provider store={store}>
+        <RouterProvider router = {router} />
+      </Provider>
+    </LanguageContext>  
   </StrictMode>,
 )
