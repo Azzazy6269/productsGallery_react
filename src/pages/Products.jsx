@@ -5,11 +5,15 @@ import ProductDetails from './ProductDetails'
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import { instance } from '../AxiosInstance';
+import { useTheme } from './../store/useThemeStore'
+
+
 const Products = () => {
   const [searchKeyWord, setSearchKeyWord] = useState("");
   const [products, setProducts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError ] = useState(null);
+  const theme = useTheme((state)=>state.theme);
 
   useEffect(()=>{
     (async()=>{
@@ -30,7 +34,7 @@ const Products = () => {
     })()
   },[searchKeyWord])
   return (
-    <>
+    <div className={`${theme==='light'? 'bg-base-100':'bg-gray-900'}`}>
       <div className="navbar mb-4">
         <label className="input" htmlFor="searchKeyWord">
         <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -52,10 +56,10 @@ const Products = () => {
       </div>
       {isLoading &&<Loading/>}
       {error && (<div><Error/></div>)}
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-6">
         {products && products.map(p=>(
           <li key={p.id}>
-            <div className="card bg-base-100 w-96 mb-4 shadow-sm">
+            <div className={`card w-96 mb-4 shadow-sm ${theme==='light'? 'bg-base-100':'bg-gray-300'}`}>
               <figure >
                 <img className=' w-auto h-96'
                   src={p.image}
@@ -77,7 +81,7 @@ const Products = () => {
         ))}
         
       </ul>
-    </>
+    </div>
   )
 
 }

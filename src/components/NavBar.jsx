@@ -1,10 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router'
-
+import { useTheme } from './../store/useThemeStore'
 const NavBar = () => {
+
+    const theme = useTheme((state)=>state.theme);
+    const toggleTheme = useTheme((state)=>state.toggleTheme);
+
   return (
     <>
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className={`navbar ${theme==='light'? 'bg-base-100':'bg-black'} shadow-sm`}>
             <div className="navbar-start">
                 <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,29 +35,39 @@ const NavBar = () => {
                         }>About us</NavLink></li>
                 </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Products Gallery</a>
+                <a className={`text-xl ${theme==='light'? 'text-black':'text-white'}`}>Products Gallery</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                 <li><NavLink
                         to='/products'
                         className={({ isActive }) =>
-                            `font-medium ${isActive ? 'text-blue-600' : 'hover:text-blue-600'}`
+                            `font-medium 
+                            ${theme==='light'? 'text-black':'text-white'}
+                            ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
+                            `
                         }>Products</NavLink></li>
                 <li><NavLink
                         to='/cart'
                         className={({ isActive }) =>
-                            `font-medium ${isActive ? 'text-blue-600' : 'hover:text-blue-600'}`
+                            `font-medium 
+                            ${theme==='light'? 'text-black':'text-white'}
+                            ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
+                            `
                         }>Cart</NavLink></li>
                 <li><NavLink
                         to='/aboutUs'
                         className={({ isActive }) =>
-                            `font-medium ${isActive ? 'text-blue-600' : 'hover:text-blue-600'}`
+                            `font-medium 
+                            ${theme==='light'? 'text-black':'text-white'}
+                            ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
+                            `
                         }>About us</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Login</a>
+                <a className="rounded-2xl btn btn-soft btn-primary m-1.5">Login</a>
+                <button className="rounded-2xl btn btn-soft btn-secondary" onClick={toggleTheme}>{theme}</button>
             </div>
         </div>
     </>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Error from './../components/Error'
 import { instance } from '../AxiosInstance';
+import { useTheme } from './../store/useThemeStore'
 
 
 //loader and errorBoundary is a replcement of useState,useEffect,isLoading,error
@@ -20,6 +21,8 @@ export const loader =async ({params})=>{
 const ProductDetails = () => {
   const { id } = useParams();
   const product = useLoaderData();
+  const theme = useTheme((state)=>state.theme);
+  
   //const [product, setProduct] = useState(null);
   //const [isLoading, setIsLoading] = useState(false);
   //const [error, setError] = useState(null);
@@ -52,9 +55,9 @@ const ProductDetails = () => {
 */
 
   return (
-    <>
+    <div className={`${theme==='light'? '!bg-base-100':'!bg-gray-900'}  p-20`}>
     {product&&(
-      <div className="card lg:card-side bg-base-100 shadow-sm  m-20">
+      <div className={`card lg:card-side bg-base-900 shadow-sm mx-20  ${theme==='light'? 'bg-base-100':'bg-gray-300'}`}>
       <figure>
         <img 
           src={product.image}
@@ -74,7 +77,7 @@ const ProductDetails = () => {
     </div>
     )}
       
-    </>
+    </div>
   );
 };
 
