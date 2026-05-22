@@ -8,7 +8,7 @@ const MainLayout = () => {
   return (
     <>
         <NavBar/>
-        <main>
+        <main >
             {navigation.state==='loading' && <Loading/>}
             <Outlet/>
         </main>

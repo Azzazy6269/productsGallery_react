@@ -1,10 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router'
-import { useTheme } from './../store/useThemeStore'
+import { useTheme } from '../store/Zustand/useThemeStore'
+import { useSelector } from 'react-redux';
+
 const NavBar = () => {
 
     const theme = useTheme((state)=>state.theme);
     const toggleTheme = useTheme((state)=>state.toggleTheme);
+    const cartItems = useSelector((state) => state.cart.items);
 
   return (
     <>
@@ -27,7 +30,7 @@ const NavBar = () => {
                         to='/cart'
                         className={({ isActive }) =>
                             `font-medium ${isActive ? 'text-blue-600' : 'hover:text-blue-600'}`
-                        }>Cart</NavLink></li>
+                        }>Cart({cartItems.length})</NavLink></li>
                     <li><NavLink
                         to='/aboutUs'
                         className={({ isActive }) =>
@@ -54,7 +57,7 @@ const NavBar = () => {
                             ${theme==='light'? 'text-black':'text-white'}
                             ${isActive ? '!text-blue-600' : 'hover:text-blue-600'}
                             `
-                        }>Cart</NavLink></li>
+                        }>Cart({cartItems.length})</NavLink></li>
                 <li><NavLink
                         to='/aboutUs'
                         className={({ isActive }) =>

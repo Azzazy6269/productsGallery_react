@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Error from './../components/Error'
 import { instance } from '../AxiosInstance';
-import { useTheme } from './../store/useThemeStore'
-
+import { useTheme } from '../store/Zustand/useThemeStore'
+import { useDispatch,useSelector } from 'react-redux';
+import { addToCart } from '../store/Redux/cartSlice';
 
 //loader and errorBoundary is a replcement of useState,useEffect,isLoading,error
 export const ErrorBoundary = ()=>{
@@ -22,7 +23,18 @@ const ProductDetails = () => {
   const { id } = useParams();
   const product = useLoaderData();
   const theme = useTheme((state)=>state.theme);
-  
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  const addToCartHandler = () => {
+  const isExists = cartItems.some(p => p.id === product.id);
+
+  if (isExists) {
+    //alert("already exists");
+    return;
+  }
+
+  dispatch(addToCart(product));
+};
   //const [product, setProduct] = useState(null);
   //const [isLoading, setIsLoading] = useState(false);
   //const [error, setError] = useState(null);
@@ -71,7 +83,7 @@ const ProductDetails = () => {
         <p>${product.price.toFixed(2)}</p>
         {product.price > 100 ? <p className='badge badge-primary max-h-10'>premium</p> : <p className='badge badge-secondary max-h-10'>best-seller</p>}
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Add to Cart</button>
+          <button className="btn btn-primary" onClick={addToCartHandler}>Add to Cart</button>
         </div>
       </div>
     </div>

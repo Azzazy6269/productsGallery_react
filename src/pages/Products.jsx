@@ -5,7 +5,7 @@ import ProductDetails from './ProductDetails'
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import { instance } from '../AxiosInstance';
-import { useTheme } from './../store/useThemeStore'
+import { useTheme } from '../store/Zustand/useThemeStore'
 
 
 const Products = () => {
@@ -56,7 +56,7 @@ const Products = () => {
       </div>
       {isLoading &&<Loading/>}
       {error && (<div><Error/></div>)}
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-6">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
         {products && products.map(p=>(
           <li key={p.id}>
             <div className={`card w-96 mb-4 shadow-sm ${theme==='light'? 'bg-base-100':'bg-gray-300'}`}>
