@@ -1,6 +1,8 @@
-import React from 'react';
+import React , {useContext} from 'react'
+import {LanguageContext} from '../context/LanguageContext'
 
 const NotFound = () => {
+  const {language}=useContext(LanguageContext);
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full text-center space-y-8">
@@ -10,7 +12,7 @@ const NotFound = () => {
             404
           </h1>
           <div className="bg-indigo-600 text-white px-2 text-sm rounded rotate-12 absolute top-12 left-1/3 inline-block">
-            Page Not Found
+            {language==='en'?'Page Not Found':'الصفحة غير موجودة'}
           </div>
         </div>
 
@@ -20,7 +22,8 @@ const NotFound = () => {
             Lost in space?
           </h2>
           <p className="text-base text-gray-600">
-            The page you're looking for doesn't exist or has been moved to another universe.
+            {language==='en'?"The page you're looking for doesn't exist or has been moved to another universe.":'الصفحة التى تحاول الوصول اليها غير موجودة. ربما تم نقلها لعنوان اخر'}
+            
           </p>
         </div>
 

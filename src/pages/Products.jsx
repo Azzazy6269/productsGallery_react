@@ -51,7 +51,7 @@ const Products = () => {
             <path d="m21 21-4.3-4.3"></path>
           </g>
         </svg>
-        <input type="search" name="searchKeyWord" required placeholder="Search"
+        <input type="search" name="searchKeyWord" required placeholder={language==='en'?'Search':'بحث'}
           onChange={(e)=>setSearchKeyWord(e.target.value)}
         />
         </label>
@@ -72,7 +72,7 @@ const Products = () => {
                 <p>{p.description.substring(0,75)}....</p>
                 <p>{p.category}</p>
                 <p>{p.price}</p>
-                {p.price>100 ? <p className='badge badge-primary max-h-10'>premium</p>:<p className='badge badge-secondary max-h-10'>best-seller</p>}
+                {p.price>100 ? <p className='badge badge-primary max-h-10'>{language==='en'?'Premium':'مميز'}</p>:<p className='badge badge-secondary max-h-10'>{language==='en'?'Best-Seller':'الأكثر مبيعا'}</p>}
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">
                   <NavLink to={`/ProductDetails/${p.id}`}>{language==='en'?'Details':'تفاصيل'}</NavLink></button>

@@ -21,11 +21,11 @@ const Cart = () => {
   <div className={`${theme === 'light' ? 'bg-base-100' : 'bg-gray-900'} min-h-screen w-full flex flex-col justify-center items-center px-4`}>
     <div className="max-w-md w-full text-center space-y-8">
       <h1 className={`${theme === 'light' ? 'text-black' : 'text-white'} text-7xl font-extrabold tracking-widest animate-bounce `}>
-        Empty cart
+        {language==='en'?'Empty Cart':'السلة فارغة'}
       </h1>
       
       <p className={`${theme === 'light' ? 'text-black' : 'text-white'}`}>
-        You haven't added items yet! add some items now.
+        {language==='en'?"You haven't added any items!":'لم تقم بإضافة اى منتج للسلة'}
       </p>
 
       <div className="pt-4">
@@ -33,7 +33,7 @@ const Cart = () => {
           to="/"
           className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-md"
         >
-          Go Back Home
+          {language==='en'?'Go back home':'انتقل للصفخة الرئيسية'}
         </Link>
       </div>
     </div>
@@ -54,7 +54,7 @@ const Cart = () => {
                 <p>{p.description.substring(0,75)}....</p>
                 <p>{p.category}</p>
                 <p>{p.price}</p>
-                {p.price>100 ? <p className='badge badge-primary max-h-10'>premium</p>:<p className='badge badge-secondary max-h-10'>best-seller</p>}
+                {p.price>100 ?  <p className='badge badge-primary max-h-10'>{language==='en'?'Premium':'مميز'}</p>:<p className='badge badge-secondary max-h-10'>{language==='en'?'Best-Seller':'الأكثر مبيعا'}</p>}
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary" onClick={()=>removeFromCartHandler(p.id)}>{language==='en'?'Remove from cart':'حذف من السلة'}</button>
                 </div>
