@@ -1,6 +1,6 @@
 import React , {useContext} from 'react'
 import {LanguageContext} from '../context/LanguageContext'
-
+import { useTheme } from '../store/Zustand/useThemeStore'
 export const ErrorBoundary = ()=>{
   return (
     <Error/>
@@ -9,6 +9,7 @@ export const ErrorBoundary = ()=>{
 
 const AboutUs = () => {
   const {language}=useContext(LanguageContext);
+  const theme = useTheme((state) => state.theme);
   
   return (
     <div className="bg-white text-gray-800 min-h-screen">
@@ -27,7 +28,7 @@ const AboutUs = () => {
       </section>
 
       {/* 2. Who We Are Section (Text + Placeholder) */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className={`${theme === 'dark' ? 'bg-gray-100' : 'bg-grey-100'} py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
@@ -45,16 +46,24 @@ const AboutUs = () => {
             </p>
           </div>
           {/* Visual Placeholder (Can be replaced with an actual <img> tag) */}
-          <div className="bg-gray-100 h-72 sm:h-96 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-200">
+          <div className={`${theme === 'dark' ? 'bg-black' : 'bg-grey-100'} h-72 sm:h-96 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-200`}>
             <span className="text-gray-400 font-medium">
-              {language === 'en' ? '[ Company Image / Team Photo ]' : '[ صورة الشركة / صورة الفريق ]'}
+              
+              <div className="flex flex-col leading-none">
+                    <span className={`text-[100px] font-black tracking-tight ${theme === 'dark' ? 'text-white' : 'text-neutral'}`}>
+                    ROFOUF
+                    </span>
+                    <span className="text-[100px] font-bold tracking-[0.2em] text-primary uppercase">
+                    Market
+                    </span>
+                </div>
             </span>
           </div>
         </div>
       </section>
 
       {/* 3. Core Values Grid */}
-      <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+      <section className={`${theme === 'dark' ? 'bg-gray-400' : 'bg-grey-50'} py-16 px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-bold text-gray-900">

@@ -16,7 +16,7 @@ const Cart = () => {
     dispatch(removeFromCart(id));
   }
   return (
-    <>
+    <div className='pt-16'>
     {!products.length && (
   <div className={`${theme === 'light' ? 'bg-base-100' : 'bg-gray-900'} min-h-screen w-full flex flex-col justify-center items-center px-4`}>
     <div className="max-w-md w-full text-center space-y-8">
@@ -66,7 +66,7 @@ const Cart = () => {
       </ul>
     </div>}
     
-    </>
+    </div>
   )
 }
 
