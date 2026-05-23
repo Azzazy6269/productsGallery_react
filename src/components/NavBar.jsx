@@ -71,7 +71,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="rounded-2xl btn btn-soft btn-primary m-1.5">{language==='en'?'Login':'تسجيل الدخول'}</a>
+                <button className="rounded-2xl btn btn-soft btn-primary m-1.5"><NavLink to= '/Register'>{language==='en'?'Login':'تسجيل الدخول'}</NavLink></button>
                 <button className="rounded-2xl btn btn-soft btn-secondary" onClick={toggleTheme}>{theme==='light'?'☀️':'🌙'}</button>
                 <button className={`mx-1 btn btn-xs btn-outline ${theme==='light'?'text-black':'text-white'}`} onClick={()=>{toggleLanguage()}}>{language}</button>
             </div>

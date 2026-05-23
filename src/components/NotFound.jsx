@@ -6,7 +6,6 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full text-center space-y-8">
-        {/* Visual 404 Heading */}
         <div className="relative">
           <h1 className="text-9xl font-extrabold text-gray-900 tracking-widest animate-bounce">
             404
@@ -19,7 +18,7 @@ const NotFound = () => {
         {/* Message Content */}
         <div className="space-y-2">
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Lost in space?
+            {language==='en'?'Lost in space?':'لا يمكنك الوصول'}
           </h2>
           <p className="text-base text-gray-600">
             {language==='en'?"The page you're looking for doesn't exist or has been moved to another universe.":'الصفحة التى تحاول الوصول اليها غير موجودة. ربما تم نقلها لعنوان اخر'}
@@ -46,7 +45,7 @@ const NotFound = () => {
                 path="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            Go Back Home
+            {language==='en'?'Go back home':'انتقل للصفخة الرئيسية'}
           </a>
         </div>
       </div>

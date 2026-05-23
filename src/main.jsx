@@ -11,6 +11,8 @@ import NotFound404 from './pages/NotFound404.jsx'
 import Products from './pages/Products.jsx'
 import AboutUs,{ErrorBoundary as AboutUsError} from './pages/AboutUs.jsx'
 import Cart from './pages/Cart.jsx'
+import Register from './pages/Register.jsx'
+import LandingPage from './pages/LandingPage.jsx'
 import ProductDetails , {ErrorBoundary as ProductDetailsError , loader as ProductDetailsLoader} from './pages/ProductDetails.jsx'
 import { addToCart, removeFromCart } from './store/Redux/cartSlice.js'
 import store from './store/Redux/store.js' 
@@ -18,13 +20,13 @@ import { LanguageContext } from './context/LanguageContext.jsx'
 //const cart = useSelector();
 const router = createBrowserRouter([
   {
-    path:'*',
-    element:<NotFound404/>
-  },
-  {
     path:'/',
     element:<MainLayout/>,
     children:[
+      {
+        index:true,
+        element:<LandingPage/>
+      },
       {
         path:'/products',
         element:<Products/>
@@ -48,7 +50,15 @@ const router = createBrowserRouter([
         element:<ProductDetails/>,
         ErrorBoundary:ProductDetailsError,
         loader:ProductDetailsLoader
-      }
+      },
+      {
+        path:'/Register',
+        element:<Register/>
+      },
+      {
+      path:'*',
+      element:<NotFound404/>
+      },
     ]
   }
 ])
